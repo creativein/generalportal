@@ -1,0 +1,23 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Log",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+            ],
+            "Resource": "arn:aws:logs:*:*:*"
+        },
+        {
+            "Sid": "DynamoDB",
+            "Effect": "Allow",
+            "Action": [
+               "dynamodb:*"
+            ],
+            "Resource": "arn:aws:dynamodb:us-east-1:049016316473:table/general_portal_users"
+        }
+    ]
+}
