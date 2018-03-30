@@ -2,7 +2,9 @@ const uuidv1 = require('uuid/v1');
 // const bcrypt = require('bcryptjs');
 const AWS = require('aws-sdk');
 const REGION = 'us-east-1';
-const docClient = new AWS.DynamoDB.DocumentClient({ region: REGION });
+const docClient = new AWS.DynamoDB.DocumentClient({
+    region: REGION
+});
 const DYNAMO_TABLE_NAME = 'docquest_users';
 // const salt = bcrypt.genSaltSync(10);
 
@@ -21,7 +23,7 @@ exports.handler = (event, context, callback) => {
             "password": event.password,
             "address": event.address,
             "stream": event.stream,
- "user_kind": event.userKind,
+            "user_kind": event.userKind,
             "createdAt": timestamp,
             "updatedAt": timestamp,
         },
@@ -29,23 +31,28 @@ exports.handler = (event, context, callback) => {
         TableName: DYNAMO_TABLE_NAME
     };
 
-    docClient.put(params, function(error, data) {
+    docClient.put(params, function (error, data) {
         if (error) {
             console.log('error', error, data);
             callback(null, {
                 statusCode: error.statusCode || 501,
-                headers: { 'Content-Type': 'application/text', 'Access-Control-Allow-Origin': '*' },
+                headers: {
+                    'Content-Type': 'application/text',
+                    'Access-Control-Allow-Origin': '*'
+                },
                 body: JSON.stringify({
                     "status": 0,
                     "message": "Could not create user."
                 }),
             });
-        }
-        else {
+        } else {
             // create a response
             const response = {
                 statusCode: 200,
-                headers: { 'Content-Type': 'application/text', 'Access-Control-Allow-Origin': '*' },
+                headers: {
+                    'Content-Type': 'application/text',
+                    'Access-Control-Allow-Origin': '*'
+                },
                 body: JSON.stringify({
                     "status": 1,
                     "message": "User created successfully."
