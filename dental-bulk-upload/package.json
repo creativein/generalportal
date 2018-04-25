@@ -1,0 +1,16 @@
+{
+  "name": "dental-bulk-upload",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.227.1",
+    "fast-csv": "^2.4.1",
+    "fs": "0.0.1-security"
+  }
+}
