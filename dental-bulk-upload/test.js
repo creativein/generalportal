@@ -14,6 +14,45 @@ const config = {
     }
 };
 
+const tableParams = {
+    AttributeDefinitions: [{
+            AttributeName: 'qid',
+            AttributeType: 'S'
+        },
+        {
+            AttributeName: 'category',
+            AttributeType: 'S'
+        }
+    ],
+    KeySchema: [{
+            AttributeName: 'qid',
+            KeyType: 'HASH'
+        },
+        {
+            AttributeName: 'category',
+            KeyType: 'RANGE'
+        }
+    ],
+    ProvisionedThroughput: {
+        ReadCapacityUnits: 5,
+        WriteCapacityUnits: 5
+    },
+    TableName: 'QUESTION_LSIST',
+    StreamSpecification: {
+        StreamEnabled: false
+    }
+};
+
+/* Create table 
+DB.createTable(tableParams, (err, data) => {
+    if (err) {
+        console.log("Error", err);
+    } else {
+        console.log("Success", data);
+    }
+});
+*/
+
 const DDB = new AWS.DynamoDB(config.test);
 
 Object.defineProperty(Array.prototype, 'chunk', {
